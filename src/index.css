@@ -2,41 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Chroma Calm - AI Meditation App Design System
+   Beautiful, responsive colors and gradients for emotional healing
+   All colors MUST be HSL for proper transitions and animations
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Interface Colors */
+    --background: 220 25% 8%;
+    --foreground: 210 40% 98%;
+    --surface: 220 20% 12%;
+    --surface-elevated: 220 15% 16%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Meditation Interface */
+    --canvas: 220 25% 6%;
+    --canvas-overlay: 220 20% 10%;
+    --text-input: 210 40% 98%;
+    --text-muted: 215 20% 65%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Emotional Color Palette */
+    --calm: 210 70% 45%;          /* Deep ocean blue for peace */
+    --calm-light: 210 60% 65%;
+    --healing: 160 70% 35%;       /* Forest green for restoration */
+    --healing-light: 160 50% 55%;
+    --strength: 25 85% 55%;       /* Warm orange for courage */
+    --strength-light: 25 75% 70%;
+    --wisdom: 280 60% 45%;        /* Deep purple for transformation */
+    --wisdom-light: 280 40% 65%;
+    --joy: 50 90% 60%;           /* Golden yellow for happiness */
+    --joy-light: 50 80% 75%;
+    --balance: 340 50% 50%;      /* Rose for emotional balance */
+    --balance-light: 340 40% 70%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Dynamic Gradients */
+    --gradient-calm: linear-gradient(135deg, hsl(210, 70%, 45%), hsl(220, 60%, 35%));
+    --gradient-healing: linear-gradient(135deg, hsl(160, 70%, 35%), hsl(180, 60%, 45%));
+    --gradient-strength: linear-gradient(135deg, hsl(25, 85%, 55%), hsl(15, 75%, 45%));
+    --gradient-wisdom: linear-gradient(135deg, hsl(280, 60%, 45%), hsl(260, 70%, 35%));
+    --gradient-joy: linear-gradient(135deg, hsl(50, 90%, 60%), hsl(45, 85%, 50%));
+    --gradient-balance: linear-gradient(135deg, hsl(340, 50%, 50%), hsl(320, 60%, 40%));
+    --gradient-neutral: linear-gradient(135deg, hsl(220, 25%, 8%), hsl(210, 30%, 12%));
+
+    /* Ambient Lighting Effects */
+    --glow-calm: 0 0 40px hsl(210, 70%, 45%, 0.3);
+    --glow-healing: 0 0 40px hsl(160, 70%, 35%, 0.3);
+    --glow-strength: 0 0 40px hsl(25, 85%, 55%, 0.3);
+    --glow-wisdom: 0 0 40px hsl(280, 60%, 45%, 0.3);
+    --glow-joy: 0 0 40px hsl(50, 90%, 60%, 0.3);
+    --glow-balance: 0 0 40px hsl(340, 50%, 50%, 0.3);
+
+    /* Interface Elements */
+    --card: 220 20% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 70% 45%;
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 220 15% 16%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 220 15% 16%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 280 60% 45%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
     --destructive-foreground: 210 40% 98%;
+    --border: 220 15% 20%;
+    --input: 220 15% 16%;
+    --ring: 210 70% 45%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Animations and Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --animation-breathe: breathe 4s ease-in-out infinite;
+    --animation-pulse-soft: pulse-soft 3s ease-in-out infinite;
+    --animation-flow: flow 8s ease-in-out infinite;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +142,139 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Meditation Canvas Styles */
+  .meditation-canvas {
+    @apply fixed inset-0 transition-all duration-1000 ease-out;
+    background: var(--gradient-neutral);
+  }
+
+  .meditation-canvas.emotion-calm {
+    background: var(--gradient-calm);
+    box-shadow: var(--glow-calm);
+  }
+
+  .meditation-canvas.emotion-healing {
+    background: var(--gradient-healing);
+    box-shadow: var(--glow-healing);
+  }
+
+  .meditation-canvas.emotion-strength {
+    background: var(--gradient-strength);
+    box-shadow: var(--glow-strength);
+  }
+
+  .meditation-canvas.emotion-wisdom {
+    background: var(--gradient-wisdom);
+    box-shadow: var(--glow-wisdom);
+  }
+
+  .meditation-canvas.emotion-joy {
+    background: var(--gradient-joy);
+    box-shadow: var(--glow-joy);
+  }
+
+  .meditation-canvas.emotion-balance {
+    background: var(--gradient-balance);
+    box-shadow: var(--glow-balance);
+  }
+
+  /* Meditation Text Input */
+  .meditation-input {
+    @apply bg-transparent border-0 outline-none resize-none text-lg leading-relaxed;
+    color: hsl(var(--text-input));
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.025em;
+  }
+
+  .meditation-input::placeholder {
+    @apply transition-opacity duration-500;
+    color: hsl(var(--text-muted));
+    opacity: 0.6;
+  }
+
+  .meditation-input:focus::placeholder {
+    opacity: 0.3;
+  }
+
+  /* Navigation Components */
+  .nav-icon {
+    @apply flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300;
+    background: hsl(var(--surface-elevated) / 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .nav-icon:hover {
+    @apply scale-110;
+    background: hsl(var(--surface-elevated));
+    box-shadow: 0 8px 32px hsl(var(--primary) / 0.2);
+  }
+
+  .nav-icon.active {
+    background: hsl(var(--primary) / 0.2);
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+
+  /* Ambient Particles */
+  .particle {
+    @apply absolute rounded-full opacity-30 animate-pulse;
+    pointer-events: none;
+  }
+
+  /* Breathing Animation */
+  .breathe {
+    animation: var(--animation-breathe);
+  }
+
+  .pulse-soft {
+    animation: var(--animation-pulse-soft);
+  }
+
+  .flow {
+    animation: var(--animation-flow);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: translateY(0px);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes flow {
+  0% { 
+    transform: translateX(-100px) rotate(0deg);
+    opacity: 0;
+  }
+  10%, 90% { 
+    opacity: 0.6;
+  }
+  100% { 
+    transform: translateX(100px) rotate(360deg);
+    opacity: 0;
   }
 }
